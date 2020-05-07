@@ -143,42 +143,6 @@ export const asyncRoutes = [
   tableRouter,
 
   {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/list',
-    name: 'Example',
-    meta: {
-      title: 'Example',
-      icon: 'example'
-    },
-    children: [
-      {
-        path: 'create',
-        component: () => import('@/views/example/create'),
-        name: 'CreateArticle',
-        meta: { title: 'Create Article', icon: 'edit' }
-      },
-      {
-        path: 'edit/:id(\\d+)',
-        component: () => import('@/views/example/edit'),
-        name: 'EditArticle',
-        meta: {
-          title: 'Edit Article',
-          noCache: true,
-          activeMenu: '/example/list'
-        },
-        hidden: true
-      },
-      {
-        path: 'list',
-        component: () => import('@/views/example/list'),
-        name: 'ArticleList',
-        meta: { title: 'Article List', icon: 'list' }
-      }
-    ]
-  },
-
-  {
     path: '/tab',
     component: Layout,
     children: [
@@ -190,32 +154,6 @@ export const asyncRoutes = [
       }
     ]
   },
-
-  {
-    path: '/error',
-    component: Layout,
-    redirect: 'noRedirect',
-    name: 'ErrorPages',
-    meta: {
-      title: 'Error Pages',
-      icon: '404'
-    },
-    children: [
-      {
-        path: '401',
-        component: () => import('@/views/error-page/401'),
-        name: 'Page401',
-        meta: { title: '401', noCache: true }
-      },
-      {
-        path: '404',
-        component: () => import('@/views/error-page/404'),
-        name: 'Page404',
-        meta: { title: '404', noCache: true }
-      }
-    ]
-  },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ];

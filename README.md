@@ -6,9 +6,9 @@
 
 http://192.168.16.97:8088/manageweb/start.html#id=u6nkpu&p=%E6%8E%A5%E5%8F%A3%E7%AE%A1%E7%90%86&g=1
 
-## 设计
+## 开发设计
 
-见[wiki](http://gitlab.sinohealth.cn/tsc-internal/middle-platform/frontend/middle-platform-console-web/wikis/home)
+开发设计见[wiki](http://gitlab.sinohealth.cn/tsc-internal/middle-platform/frontend/middle-platform-console-web/wikis/home)
 
 ## 开发
 
