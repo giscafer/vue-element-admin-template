@@ -3,6 +3,7 @@ import Layout from '@/layout';
 import Vue from 'vue';
 import Router from 'vue-router';
 import tableRouter from './modules/table';
+import openMiddlePlatformRouter from './modules/open-middle-platform';
 
 Vue.use(Router);
 
@@ -72,8 +73,8 @@ export const constantRoutes = [
       {
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        name: '首页',
+        meta: { title: '首页', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -140,6 +141,7 @@ export const asyncRoutes = [
     ]
   },
 
+  openMiddlePlatformRouter,
   tableRouter,
 
   {
