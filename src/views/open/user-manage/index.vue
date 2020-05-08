@@ -27,16 +27,7 @@
       >新增用户</el-button>
     </div>
 
-    <el-table
-      :key="tableKey"
-      v-loading="listLoading"
-      :data="list"
-      border
-      fit
-      highlight-current-row
-      style="width: 100%;"
-      @sort-change="sortChange"
-    >
+    <sino-table :data="responseData" @query-change="getList">
       <el-table-column
         label="ID"
         prop="id"
@@ -97,22 +88,14 @@
           <el-button size="mini" type="danger" @click="handleResetPsw(row,$index)">重置密码</el-button>
         </template>
       </el-table-column>
-    </el-table>
-
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="getList"
-    />
+    </sino-table>
 
     <el-dialog :visible.sync="dialogAkVisible" title="查看" width="650px">
       <el-row :gutter="10">
-        <el-col :span="3">
+        <el-col :span="4">
           <div style="line-height: 36px; text-align: right;">{{ secretData.label }}</div>
         </el-col>
-        <el-col :span="19">
+        <el-col :span="18">
           <el-input v-model="secretData.value" :disabled="true">
             <el-button
               slot="append"
@@ -135,12 +118,12 @@
 import { fetchList, createArticle, updateArticle } from '@/api/user-manage'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-import { successToast, errorToast } from '../../../utils/toast'
+import SinoTable from '@/components/SinoTable' // secondary package based on el-pagination
+import { successToast, errorToast } from '@/utils/message.js'
 
 export default {
   name: 'UserManage',
-  components: { Pagination },
+  components: { SinoTable },
   directives: { waves },
   filters: {
     statusFilter(status) {
@@ -164,12 +147,6 @@ export default {
         account: undefined,
         sort: '+id'
       },
-      importanceOptions: [1, 2, 3],
-      sortOptions: [
-        { label: 'ID Ascending', key: '+id' },
-        { label: 'ID Descending', key: '-id' }
-      ],
-      statusOptions: ['published', 'draft', 'deleted'],
       temp: {
         id: undefined,
         importance: 1,
@@ -190,6 +167,7 @@ export default {
         label: '',
         value: ''
       },
+      responseData: {},
       rules: {
         type: [
           { required: true, message: 'type is required', trigger: 'change' }
@@ -213,16 +191,18 @@ export default {
     this.getList()
   },
   methods: {
-    getList() {
-      this.listLoading = true
+    getList(evt) {
+      if (evt) {
+        Object.assign(this.listQuery, evt)
+        console.log(evt)
+      }
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
-        console.log(this.list)
-        // Just to simulate the time of the request
+        this.list = response.data
         setTimeout(() => {
-          this.listLoading = false
+          this.responseData = response
         }, 1000)
+        this.total = response.pageInfo.totalSize
+        // Just to simulate the time of the request
       })
     },
     handleFilter() {

@@ -22,7 +22,7 @@ export default [
     url: '/vue-element-admin/user/list',
     type: 'get',
     response: config => {
-      const { account, page = 1, limit = 10, sort } = config.query;
+      const { account, page = 1, size = 10, sort } = config.query;
 
       let mockList = List.filter(item => {
         if (account && item.account !== account) return false;
@@ -34,14 +34,20 @@ export default [
       }
 
       const pageList = mockList.filter(
-        (item, index) => index < limit * page && index >= limit * (page - 1)
+        (item, index) => index < size * page && index >= size * (page - 1)
       );
 
       return {
         code: 2000,
-        data: {
-          total: mockList.length,
-          items: pageList
+        desc: '查询成功',
+        data: pageList,
+        pageInfo: {
+          totalSize: mockList.length,
+          totalPages: Math.ceil(mockList.length / 10),
+          size: size,
+          first: true,
+          last: false,
+          number: size * page + size
         }
       };
     }
