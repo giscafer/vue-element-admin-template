@@ -17,7 +17,7 @@
         icon="el-icon-search"
         style="margin-left: 20px;"
         @click="handleFilter"
-      >Search</el-button>
+      >查询</el-button>
       <el-button
         class="filter-item"
         style="margin-left: 20px;"
@@ -27,20 +27,20 @@
       >新增用户</el-button>
     </div>
 
-    <sino-table :data="responseData" @query-change="getList">
+    <sino-table :data="responseData" :loading.sync="listLoading" @query-change="getList">
       <el-table-column
         label="ID"
         prop="id"
         sortable="custom"
         align="center"
-        width="80"
+        width="90"
         :class-name="getSortClass('id')"
       >
         <template slot-scope="{row}">
           <span>{{ row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="账号名" width="150px" align="center">
+      <el-table-column label="账号名" width="160px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.account }}</span>
         </template>
@@ -194,13 +194,14 @@ export default {
     getList(evt) {
       if (evt) {
         Object.assign(this.listQuery, evt)
-        console.log(evt)
       }
+      this.listLoading = true
       fetchList(this.listQuery).then(response => {
         this.list = response.data
         setTimeout(() => {
           this.responseData = response
-        }, 1000)
+          this.listLoading = false
+        }, 800)
         this.total = response.pageInfo.totalSize
         // Just to simulate the time of the request
       })

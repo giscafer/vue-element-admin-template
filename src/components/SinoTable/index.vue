@@ -10,6 +10,7 @@
       style="width: 100%;"
     >
       <slot></slot>
+      <slot name="enhancement"></slot>
     </el-table>
 
     <pagination
@@ -46,7 +47,12 @@ export default {
       type: String,
       default: ''
     },
+    loading: {
+      type: Boolean,
+      default: false
+    },
     titles: {
+      // TODO: 自动列
       type: Array,
       default: () => {
         return []
@@ -65,7 +71,6 @@ export default {
   data() {
     return {
       tableKey,
-      loading: true,
       innerCurrentPage: 1,
       innerPageSize: 10
     }
@@ -105,7 +110,7 @@ export default {
     data: {
       handler(value) {
         // console.log(value)
-        this.loading = false
+        // this.tableLoading = false
       }
     }
   },
@@ -116,7 +121,6 @@ export default {
         ...evt
       }
       // console.log(evt)
-      this.loading = true
       this.$emit('query-change', info)
     }
   }
