@@ -61,12 +61,12 @@
       </el-table-column>
       <el-table-column label="accessKey" width="110px" align="center">
         <template slot-scope="{row}">
-          <span class="link-type" @click="handleFetchPv(row)">点击查看</span>
+          <span class="link-type" @click="handleView(row,'accessKey')">点击查看</span>
         </template>
       </el-table-column>
       <el-table-column label="密钥" width="110px" align="center">
         <template slot-scope="{row}">
-          <span class="link-type" @click="handleFetchPv(row)">点击查看</span>
+          <span class="link-type" @click="handleView(row,'secret')">点击查看</span>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" class-name="status-col" width="150px">
@@ -107,13 +107,25 @@
       @pagination="getList"
     />
 
-    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
-      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel" />
-        <el-table-column prop="pv" label="Pv" />
-      </el-table>
+    <el-dialog :visible.sync="dialogAkVisible" title="查看" width="650px">
+      <el-row :gutter="10">
+        <el-col :span="3">
+          <div style="line-height: 36px; text-align: right;">{{ secretData.label }}</div>
+        </el-col>
+        <el-col :span="19">
+          <el-input v-model="secretData.value" :disabled="true">
+            <el-button
+              slot="append"
+              v-clipboard:copy="secretData.value"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onCopyError"
+              icon="el-icon-copy-document"
+            ></el-button>
+          </el-input>
+        </el-col>
+      </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
+        <el-button type="primary" @click="dialogAkVisible = false">关闭</el-button>
       </span>
     </el-dialog>
   </div>
@@ -124,6 +136,7 @@ import { fetchList, createArticle, updateArticle } from '@/api/user-manage'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import { successToast, errorToast } from '../../../utils/toast'
 
 export default {
   name: 'UserManage',
@@ -172,8 +185,11 @@ export default {
         update: 'Edit',
         create: 'Create'
       },
-      dialogPvVisible: false,
-      pvData: [],
+      dialogAkVisible: false,
+      secretData: {
+        label: '',
+        value: ''
+      },
       rules: {
         type: [
           { required: true, message: 'type is required', trigger: 'change' }
@@ -308,8 +324,12 @@ export default {
       })
       this.list.splice(index, 1)
     },
-    handleFetchPv(pv) {
-      // 查看秘钥
+    handleView(row, type) {
+      this.dialogAkVisible = true
+      this.secretData = {
+        label: type,
+        value: row[type]
+      }
     },
     formatJson(filterVal) {
       return this.list.map(v =>
@@ -325,6 +345,12 @@ export default {
     getSortClass: function(key) {
       const sort = this.listQuery.sort
       return sort === `+${key}` ? 'ascending' : 'descending'
+    },
+    onCopy() {
+      successToast('复制成功')
+    },
+    onCopyError() {
+      errorToast('复制失败！')
     }
   }
 }
