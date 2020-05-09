@@ -1,14 +1,8 @@
 # middle-platform-console-web
 
-基于 [vue-element-admin](https://panjiachen.github.io/vue-element-admin) 模板开发
+删减版的  [vue-element-admin](https://panjiachen.github.io/vue-element-admin)  ，用于开发简单的后台管理系统，根据自身情况做删减不推荐别人使用模板开发
 
-## 原型
 
-http://192.168.16.97:8088/manageweb/start.html#id=u6nkpu&p=%E6%8E%A5%E5%8F%A3%E7%AE%A1%E7%90%86&g=1
-
-## 开发设计
-
-开发设计见[wiki](http://gitlab.sinohealth.cn/tsc-internal/middle-platform/frontend/middle-platform-console-web/wikis/home)
 
 ## 开发
 
@@ -59,10 +53,6 @@ npm run lint -- --fix
 
 更多信息请参考 [使用文档](https://panjiachen.github.io/vue-element-admin-site/zh/)
 
-## Changelog
 
-..
 
-## Online Demo
 
-在线 Demo: 待部署测试环境
