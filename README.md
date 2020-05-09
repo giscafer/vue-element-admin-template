@@ -8,7 +8,7 @@
 
 ```bash
 # 克隆项目
-git clone http://gitlab.sinohealth.cn/tsc-internal/middle-platform/frontend/middle-platform-console-web.git
+git clone https://github.com/giscafer/vue-element-admin-template.git
 
 # 进入项目目录
 cd middle-platform-console-web
