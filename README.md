@@ -1,4 +1,5 @@
-# middle-platform-console-web
+# vue-element-admin-template
+
 
 删减版的  [vue-element-admin](https://panjiachen.github.io/vue-element-admin)  ，用于开发简单的后台管理系统，根据自身情况做删减不推荐别人使用模板开发
 
