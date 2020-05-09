@@ -27,7 +27,7 @@
       >新增用户</el-button>
     </div>
 
-    <sino-table :data="responseData" :loading.sync="listLoading" @query-change="getList">
+    <s-table :data="responseData" :loading.sync="listLoading" @query-change="getList">
       <el-table-column
         label="ID"
         prop="id"
@@ -88,7 +88,7 @@
           <el-button size="mini" type="danger" @click="handleResetPsw(row,$index)">重置密码</el-button>
         </template>
       </el-table-column>
-    </sino-table>
+    </s-table>
 
     <el-dialog :visible.sync="dialogAkVisible" title="查看" width="650px">
       <el-row :gutter="10">
@@ -118,12 +118,12 @@
 import { fetchList, createArticle, updateArticle } from '@/api/user-manage'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
-import SinoTable from '@/components/SinoTable' // secondary package based on el-pagination
+import STable from '@/components/Table'
 import { successToast, errorToast } from '@/utils/message.js'
 
 export default {
   name: 'UserManage',
-  components: { SinoTable },
+  components: { STable },
   directives: { waves },
   filters: {
     statusFilter(status) {

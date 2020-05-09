@@ -17,6 +17,8 @@
 <script>
 import { scrollTo } from '@/utils/scroll-to'
 
+export const defaultPageSizes = [10, 20, 30, 50]
+
 export default {
   name: 'Pagination',
   props: {
@@ -35,7 +37,7 @@ export default {
     pageSizes: {
       type: Array,
       default() {
-        return [10, 20, 30, 50]
+        return defaultPageSizes
       }
     },
     layout: {

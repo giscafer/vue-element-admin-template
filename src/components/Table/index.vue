@@ -10,34 +10,40 @@
       style="width: 100%;"
     >
       <!-- columns -->
-      <el-table-column
-        v-for="col in columns"
-        :key="col.field"
-        :label="col.label"
-        :width="col.width"
-        :align="col.align || 'center'"
-      >
-        <template slot-scope="{row}">
-          <span>{{ row[col.field] }}</span>
-        </template>
-      </el-table-column>
-      <!-- other template -->
+      <template v-if="columns && columns.length>0">
+        <el-table-column
+          v-for="col in columns"
+          :key="col.field"
+          :label="col.label"
+          :width="col.width"
+          :align="col.align || 'center'"
+        >
+          <template slot-scope="{row}">
+            <span v-if="!col.scopedSlots">{{ row[col.field] }}</span>
+            <!-- custom render -->
+            <slot v-else :name="col.scopedSlots.customRender" :row="row"></slot>
+          </template>
+        </el-table-column>
+      </template>
+
+      <!-- action template -->
       <slot></slot>
-      <slot name="operate"></slot>
+      <slot name="action"></slot>
     </el-table>
 
     <pagination
-      v-show="pageInfo.totalSize>0"
+      v-show="showPagination && pageInfo.totalSize>0"
       :total="pageInfo.totalSize"
       :page.sync="innerCurrentPage"
-      :limit.sync="innerPageSize"
+      :limit.sync="pageSize"
+      :page-sizes="pageSizes"
       @pagination="queryChange"
     />
   </div>
 </template>
 
 <script>
-import Pagination from '@/components/Pagination'
+import Pagination, { defaultPageSizes } from '@/components/Pagination'
 
 const tableKey = Math.random()
   .toString(16)
@@ -53,7 +59,7 @@ const defaultPageInfo = {
 }
 
 export default {
-  name: 'SinoTable',
+  name: 'STable',
   components: { Pagination },
   props: {
     loadingStr: {
@@ -63,6 +69,20 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    showPagination: {
+      type: Boolean,
+      default: true
+    },
+    pageSize: {
+      type: Number,
+      default: 10
+    },
+    pageSizes: {
+      type: Array,
+      default() {
+        return defaultPageSizes
+      }
     },
     columns: {
       type: Array,
@@ -83,8 +103,7 @@ export default {
   data() {
     return {
       tableKey,
-      innerCurrentPage: 1,
-      innerPageSize: 10
+      innerCurrentPage: 1
     }
   },
   computed: {
@@ -104,7 +123,7 @@ export default {
     queryInfo() {
       return {
         page: this.innerCurrentPage,
-        size: this.innerPageSize
+        size: this.pageSize
       }
     }
   },
@@ -117,7 +136,7 @@ export default {
     }
   },
   created() {
-    console.log(this.columns)
+    // console.log(this.columns)
     this.queryChange({ type: 'init' })
     // fix https://github.com/njleonzhang/vue-data-tables/issues/172
     /*   const currentPage = this.pageInfo.number / this.pageInfo.size

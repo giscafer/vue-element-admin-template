@@ -3,7 +3,7 @@ import Layout from '@/layout';
 const demoRouter = {
   path: '/demo',
   component: Layout,
-  redirect: '/demo/sino-table',
+  redirect: '/demo/s-table',
   name: 'Demo',
   meta: {
     title: 'Demo',
@@ -11,10 +11,10 @@ const demoRouter = {
   },
   children: [
     {
-      path: 'sino-table',
-      component: () => import('@/views/demo/sino-table/index'),
-      name: 'SinoTable Demo',
-      meta: { title: 'SinoTable Demo' }
+      path: 'table',
+      component: () => import('@/views/demo/table/index'),
+      name: 'STable Demo',
+      meta: { title: 'STable Demo' }
     },
     {
       path: 'drag-table',
