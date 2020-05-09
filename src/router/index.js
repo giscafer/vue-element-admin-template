@@ -3,6 +3,7 @@ import Layout from '@/layout';
 import Vue from 'vue';
 import Router from 'vue-router';
 import tableRouter from './modules/table';
+import demoRouter from './modules/demo';
 import openMiddlePlatformRouter from './modules/open-middle-platform';
 
 Vue.use(Router);
@@ -143,6 +144,7 @@ export const asyncRoutes = [
 
   openMiddlePlatformRouter,
   tableRouter,
+  demoRouter,
 
   {
     path: '/tab',

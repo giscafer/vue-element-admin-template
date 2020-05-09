@@ -9,8 +9,21 @@
       highlight-current-row
       style="width: 100%;"
     >
+      <!-- columns -->
+      <el-table-column
+        v-for="col in columns"
+        :key="col.field"
+        :label="col.label"
+        :width="col.width"
+        :align="col.align || 'center'"
+      >
+        <template slot-scope="{row}">
+          <span>{{ row[col.field] }}</span>
+        </template>
+      </el-table-column>
+      <!-- other template -->
       <slot></slot>
-      <slot name="enhancement"></slot>
+      <slot name="operate"></slot>
     </el-table>
 
     <pagination
@@ -51,8 +64,7 @@ export default {
       type: Boolean,
       default: false
     },
-    titles: {
-      // TODO: 自动列
+    columns: {
       type: Array,
       default: () => {
         return []
@@ -74,16 +86,6 @@ export default {
       innerCurrentPage: 1,
       innerPageSize: 10
     }
-  },
-  create() {
-    this.queryChange({ type: 'init' })
-    // fix https://github.com/njleonzhang/vue-data-tables/issues/172
-    /*   const currentPage = this.pageInfo.number / this.pageInfo.size
-    this.innerCurrentPage = Math.ceil(currentPage)
-    this.innerTotal =
-      totalPage >= this.currentPage
-        ? this.pageInfo.totalSize
-        : this.pageSize * this.currentPage */
   },
   computed: {
     tableData() {
@@ -113,6 +115,17 @@ export default {
         // this.tableLoading = false
       }
     }
+  },
+  created() {
+    console.log(this.columns)
+    this.queryChange({ type: 'init' })
+    // fix https://github.com/njleonzhang/vue-data-tables/issues/172
+    /*   const currentPage = this.pageInfo.number / this.pageInfo.size
+    this.innerCurrentPage = Math.ceil(currentPage)
+    this.innerTotal =
+      totalPage >= this.currentPage
+        ? this.pageInfo.totalSize
+        : this.pageSize * this.currentPage */
   },
   methods: {
     queryChange(evt) {
