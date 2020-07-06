@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <!-- 基本用法 -->
-    <h3>STable 基本用法</h3>
+    <h3 class="margin-top-30">STable 基本用法</h3>
     <s-table
       :data="data"
       :loading="listLoading"
@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/user-manage' // Mock
-import STable from '@/components/Table'
+import { fetchList } from '@/api/user-manage'; // Mock
+import STable from '@/components/Table';
 
 export default {
   components: { STable },
@@ -90,27 +90,27 @@ export default {
       data: null,
       listLoading: false,
       listQuery: {}
-    }
+    };
   },
   created() {},
   methods: {
     getList(evt) {
       if (evt) {
-        Object.assign(this.listQuery, evt)
+        Object.assign(this.listQuery, evt);
       }
-      this.listLoading = true
+      this.listLoading = true;
       fetchList(this.listQuery).then(response => {
-        this.data = response
+        this.data = response;
         setTimeout(() => {
-          this.listLoading = false
-        }, 500)
-      })
+          this.listLoading = false;
+        }, 500);
+      });
     },
     handleAction(row, evt) {
-      this.$message({ message: '点击了按钮', type: 'success' })
+      this.$message({ message: '点击了按钮', type: 'success' });
     }
   }
-}
+};
 </script>
 <style scoped  lang='scss'>
 .page {

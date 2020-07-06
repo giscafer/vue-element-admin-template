@@ -2,11 +2,11 @@
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo" />
+        <img v-if="logo" src="@/assets/images/sinohealth.png" class="sidebar-logo mini" />
         <h1 v-else class="sidebar-title">{{ title }}</h1>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo" />
+        <img v-if="logo" src="@/assets/images/sinohealth.png" class="sidebar-logo" />
         <h1 class="sidebar-title">{{ title }}</h1>
       </router-link>
     </transition>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import settings from '@/settings'
 export default {
   name: 'SidebarLogo',
   props: {
@@ -24,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: 'Middle Platform Admin',
+      title: settings.title,
       logo:
         'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
@@ -56,7 +57,8 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
+      // width: 32px;
+      width: 102px;
       height: 32px;
       vertical-align: middle;
       margin-right: 12px;
@@ -77,6 +79,10 @@ export default {
   &.collapse {
     .sidebar-logo {
       margin-right: 0px;
+    }
+    .mini {
+      width: 50px;
+      height: 20px;
     }
   }
 }
