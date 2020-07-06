@@ -15,7 +15,7 @@ NameList.push({ name: 'mock-Pan' });
 export default [
   // username search
   {
-    url: '/vue-element-admin/search/user',
+    url: '/vue-admin-template/search/user',
     type: 'get',
     response: config => {
       const { name } = config.query;
@@ -32,7 +32,7 @@ export default [
 
   // transaction list
   {
-    url: '/vue-element-admin/transaction/list',
+    url: '/vue-admin-template/transaction/list',
     type: 'get',
     response: _ => {
       return {

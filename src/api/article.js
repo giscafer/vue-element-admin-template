@@ -1,41 +1,41 @@
-import request from '@/utils/request'
+import request from '@/utils/request';
 
 export function fetchList(query) {
   return request({
-    url: '/vue-element-admin/article/list',
+    url: '/vue-admin-template/article/list',
     method: 'get',
     params: query
-  })
+  });
 }
 
 export function fetchArticle(id) {
   return request({
-    url: '/vue-element-admin/article/detail',
+    url: '/vue-admin-template/article/detail',
     method: 'get',
     params: { id }
-  })
+  });
 }
 
 export function fetchPv(pv) {
   return request({
-    url: '/vue-element-admin/article/pv',
+    url: '/vue-admin-template/article/pv',
     method: 'get',
     params: { pv }
-  })
+  });
 }
 
 export function createArticle(data) {
   return request({
-    url: '/vue-element-admin/article/create',
+    url: '/vue-admin-template/article/create',
     method: 'post',
     data
-  })
+  });
 }
 
 export function updateArticle(data) {
   return request({
-    url: '/vue-element-admin/article/update',
+    url: '/vue-admin-template/article/update',
     method: 'post',
     data
-  })
+  });
 }

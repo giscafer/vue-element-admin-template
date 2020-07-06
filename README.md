@@ -1,15 +1,12 @@
-# vue-element-admin-template
+# vue-admin-template
 
-
-删减版的  [vue-element-admin](https://panjiachen.github.io/vue-element-admin)  ，用于开发简单的后台管理系统，根据自身情况做删减不推荐别人使用模板开发
-
-
+删减版的 [vue-admin-template](https://panjiachen.github.io/vue-admin-template) ，用于开发简单的后台管理系统，根据自身情况做删减不推荐别人使用模板开发
 
 ## 开发
 
 ```bash
 # 克隆项目
-git clone https://github.com/giscafer/vue-element-admin-template.git
+git clone https://github.com/giscafer/vue-admin-template.git
 
 # 进入项目目录
 cd middle-platform-console-web
@@ -52,8 +49,4 @@ npm run lint
 npm run lint -- --fix
 ```
 
-更多信息请参考 [使用文档](https://panjiachen.github.io/vue-element-admin-site/zh/)
-
-
-
-
+更多信息请参考 [使用文档](https://panjiachen.github.io/vue-admin-template-site/zh/)

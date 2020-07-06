@@ -19,7 +19,7 @@ for (let i = 0; i < count; i++) {
 
 export default [
   {
-    url: '/vue-element-admin/user/list',
+    url: '/vue-admin-template/user/list',
     type: 'get',
     response: config => {
       const { account, page = 1, size = 10, sort } = config.query;
@@ -33,9 +33,7 @@ export default [
         mockList = mockList.reverse();
       }
 
-      const pageList = mockList.filter(
-        (item, index) => index < size * page && index >= size * (page - 1)
-      );
+      const pageList = mockList.filter((item, index) => index < size * page && index >= size * (page - 1));
 
       return {
         code: 2000,
@@ -54,7 +52,7 @@ export default [
   },
 
   {
-    url: '/vue-element-admin/article/detail',
+    url: '/vue-admin-template/article/detail',
     type: 'get',
     response: config => {
       const { id } = config.query;
@@ -70,7 +68,7 @@ export default [
   },
 
   {
-    url: '/vue-element-admin/article/create',
+    url: '/vue-admin-template/article/create',
     type: 'post',
     response: _ => {
       return {
@@ -81,7 +79,7 @@ export default [
   },
 
   {
-    url: '/vue-element-admin/article/update',
+    url: '/vue-admin-template/article/update',
     type: 'post',
     response: _ => {
       return {

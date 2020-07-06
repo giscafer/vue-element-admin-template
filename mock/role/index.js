@@ -20,8 +20,7 @@ const roles = [
   {
     key: 'visitor',
     name: 'visitor',
-    description:
-      'Just a visitor. Can only see the home page and the document page',
+    description: 'Just a visitor. Can only see the home page and the document page',
     routes: [
       {
         path: '',
@@ -41,7 +40,7 @@ const roles = [
 export default [
   // mock get all routes form server
   {
-    url: '/vue-element-admin/routes',
+    url: '/vue-admin-template/routes',
     type: 'get',
     response: _ => {
       return {
@@ -53,7 +52,7 @@ export default [
 
   // mock get all roles form server
   {
-    url: '/vue-element-admin/roles',
+    url: '/vue-admin-template/roles',
     type: 'get',
     response: _ => {
       return {
@@ -65,7 +64,7 @@ export default [
 
   // add role
   {
-    url: '/vue-element-admin/role',
+    url: '/vue-admin-template/role',
     type: 'post',
     response: {
       code: 2000,
@@ -77,7 +76,7 @@ export default [
 
   // update role
   {
-    url: '/vue-element-admin/role/[A-Za-z0-9]',
+    url: '/vue-admin-template/role/[A-Za-z0-9]',
     type: 'put',
     response: {
       code: 2000,
@@ -89,7 +88,7 @@ export default [
 
   // delete role
   {
-    url: '/vue-element-admin/role/[A-Za-z0-9]',
+    url: '/vue-admin-template/role/[A-Za-z0-9]',
     type: 'delete',
     response: {
       code: 2000,
