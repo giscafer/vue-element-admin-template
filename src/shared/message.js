@@ -33,6 +33,17 @@ export function successToast(message, duration = 1500) {
     duration
   });
 }
+/**
+ * 信息提示
+ * @param {string} message
+ */
+export function infoToast(message, duration = 1500) {
+  Vue.prototype.$message({
+    message,
+    type: 'info',
+    duration
+  });
+}
 
 /**
  * 失败信息提示
@@ -44,4 +55,19 @@ export function errorToast(message, duration = 1500) {
     type: 'error',
     duration
   });
+}
+/**
+ * 警告信息提示
+ * @param {string} message
+ */
+export function warningToast(message, duration = 1500) {
+  Vue.prototype.$message({
+    message,
+    type: 'warning',
+    duration
+  });
+}
+
+export function errorBox(content) {
+  Vue.prototype.$alert(content, 'Error', { confirmButtonText: 'OK' });
 }

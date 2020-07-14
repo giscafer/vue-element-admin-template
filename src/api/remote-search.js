@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '@/shared/request';
 
 export function searchUser(name) {
   return request({

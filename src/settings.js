@@ -1,4 +1,5 @@
 module.exports = {
+  loginPageTitle: '管理系统项目模板',
   title: '管理后台',
 
   /**

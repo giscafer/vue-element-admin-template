@@ -115,11 +115,11 @@
 </template>
 
 <script>
-import { fetchList, createArticle, updateArticle } from '@/api/user-manage'
-import waves from '@/directive/waves' // waves directive
-import { parseTime } from '@/utils'
-import STable from '@/components/Table'
-import { successToast, errorToast } from '@/utils/message.js'
+import { fetchList, createArticle, updateArticle } from '@/api/user-manage';
+import waves from '@/directive/waves'; // waves directive
+import { parseTime } from '@/shared/utils';
+import STable from '@/components/Table';
+import { successToast, errorToast } from '@/shared/message.js';
 
 export default {
   name: 'UserManage',
@@ -131,8 +131,8 @@ export default {
         published: 'success',
         draft: 'info',
         deleted: 'danger'
-      }
-      return statusMap[status]
+      };
+      return statusMap[status];
     }
   },
   data() {
@@ -169,9 +169,7 @@ export default {
       },
       responseData: {},
       rules: {
-        type: [
-          { required: true, message: 'type is required', trigger: 'change' }
-        ],
+        type: [{ required: true, message: 'type is required', trigger: 'change' }],
         timestamp: [
           {
             type: 'date',
@@ -180,56 +178,54 @@ export default {
             trigger: 'change'
           }
         ],
-        title: [
-          { required: true, message: 'title is required', trigger: 'blur' }
-        ]
+        title: [{ required: true, message: 'title is required', trigger: 'blur' }]
       },
       downloadLoading: false
-    }
+    };
   },
   created() {
-    this.getList()
+    this.getList();
   },
   methods: {
     getList(evt) {
       if (evt) {
-        Object.assign(this.listQuery, evt)
+        Object.assign(this.listQuery, evt);
       }
-      this.listLoading = true
+      this.listLoading = true;
       fetchList(this.listQuery).then(response => {
-        this.list = response.data
+        this.list = response.data;
         setTimeout(() => {
-          this.responseData = response
-          this.listLoading = false
-        }, 800)
-        this.total = response.pageInfo.totalSize
+          this.responseData = response;
+          this.listLoading = false;
+        }, 800);
+        this.total = response.pageInfo.totalSize;
         // Just to simulate the time of the request
-      })
+      });
     },
     handleFilter() {
-      this.listQuery.page = 1
-      this.getList()
+      this.listQuery.page = 1;
+      this.getList();
     },
     handleAcctStatus(row, status) {
       this.$message({
         message: '操作Success',
         type: 'success'
-      })
-      row.status = status
+      });
+      row.status = status;
     },
     sortChange(data) {
-      const { prop, order } = data
+      const { prop, order } = data;
       if (prop === 'id') {
-        this.sortByID(order)
+        this.sortByID(order);
       }
     },
     sortByID(order) {
       if (order === 'ascending') {
-        this.listQuery.sort = '+id'
+        this.listQuery.sort = '+id';
       } else {
-        this.listQuery.sort = '-id'
+        this.listQuery.sort = '-id';
       }
-      this.handleFilter()
+      this.handleFilter();
     },
     resetTemp() {
       this.temp = {
@@ -240,61 +236,61 @@ export default {
         title: '',
         status: 'published',
         type: ''
-      }
+      };
     },
     handleCreate() {
-      this.resetTemp()
-      this.dialogStatus = 'create'
-      this.dialogFormVisible = true
+      this.resetTemp();
+      this.dialogStatus = 'create';
+      this.dialogFormVisible = true;
       this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
+        this.$refs['dataForm'].clearValidate();
+      });
     },
     createData() {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
-          this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
-          this.temp.author = 'vue-admin-template'
+          this.temp.id = parseInt(Math.random() * 100) + 1024; // mock a id
+          this.temp.author = 'vue-admin-template';
           createArticle(this.temp).then(() => {
-            this.list.unshift(this.temp)
-            this.dialogFormVisible = false
+            this.list.unshift(this.temp);
+            this.dialogFormVisible = false;
             this.$notify({
               title: 'Success',
               message: 'Created Successfully',
               type: 'success',
               duration: 2000
-            })
-          })
+            });
+          });
         }
-      })
+      });
     },
     handleUpdate(row) {
-      this.temp = Object.assign({}, row) // copy obj
-      this.temp.timestamp = new Date(this.temp.timestamp)
-      this.dialogStatus = 'update'
-      this.dialogFormVisible = true
+      this.temp = Object.assign({}, row); // copy obj
+      this.temp.timestamp = new Date(this.temp.timestamp);
+      this.dialogStatus = 'update';
+      this.dialogFormVisible = true;
       this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
+        this.$refs['dataForm'].clearValidate();
+      });
     },
     updateData() {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
-          const tempData = Object.assign({}, this.temp)
-          tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
+          const tempData = Object.assign({}, this.temp);
+          tempData.timestamp = +new Date(tempData.timestamp); // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
           updateArticle(tempData).then(() => {
-            const index = this.list.findIndex(v => v.id === this.temp.id)
-            this.list.splice(index, 1, this.temp)
-            this.dialogFormVisible = false
+            const index = this.list.findIndex(v => v.id === this.temp.id);
+            this.list.splice(index, 1, this.temp);
+            this.dialogFormVisible = false;
             this.$notify({
               title: 'Success',
               message: 'Update Successfully',
               type: 'success',
               duration: 2000
-            })
-          })
+            });
+          });
         }
-      })
+      });
     },
     handleDelete(row, index) {
       this.$notify({
@@ -302,37 +298,37 @@ export default {
         message: 'Delete Successfully',
         type: 'success',
         duration: 2000
-      })
-      this.list.splice(index, 1)
+      });
+      this.list.splice(index, 1);
     },
     handleView(row, type) {
-      this.dialogAkVisible = true
+      this.dialogAkVisible = true;
       this.secretData = {
         label: type,
         value: row[type]
-      }
+      };
     },
     formatJson(filterVal) {
       return this.list.map(v =>
         filterVal.map(j => {
           if (j === 'timestamp') {
-            return parseTime(v[j])
+            return parseTime(v[j]);
           } else {
-            return v[j]
+            return v[j];
           }
         })
-      )
+      );
     },
     getSortClass: function(key) {
-      const sort = this.listQuery.sort
-      return sort === `+${key}` ? 'ascending' : 'descending'
+      const sort = this.listQuery.sort;
+      return sort === `+${key}` ? 'ascending' : 'descending';
     },
     onCopy() {
-      successToast('复制成功')
+      successToast('复制成功');
     },
     onCopyError() {
-      errorToast('复制失败！')
+      errorToast('复制失败！');
     }
   }
-}
+};
 </script>

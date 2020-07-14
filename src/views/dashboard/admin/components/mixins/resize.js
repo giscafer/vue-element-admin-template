@@ -1,4 +1,4 @@
-import { debounce } from '@/utils';
+import { debounce } from '@/shared/utils';
 
 export default {
   data() {

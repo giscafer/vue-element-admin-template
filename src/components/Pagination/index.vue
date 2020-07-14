@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import { scrollTo } from '@/utils/scroll-to'
+import { scrollTo } from '@/shared/utils/scroll-to';
 
-export const defaultPageSizes = [10, 20, 30, 50]
+export const defaultPageSizes = [10, 20, 30, 50];
 
 export default {
   name: 'Pagination',
@@ -37,7 +37,7 @@ export default {
     pageSizes: {
       type: Array,
       default() {
-        return defaultPageSizes
+        return defaultPageSizes;
       }
     },
     layout: {
@@ -60,18 +60,18 @@ export default {
   computed: {
     currentPage: {
       get() {
-        return this.page
+        return this.page;
       },
       set(val) {
-        this.$emit('update:page', val)
+        this.$emit('update:page', val);
       }
     },
     pageSize: {
       get() {
-        return this.limit
+        return this.limit;
       },
       set(val) {
-        this.$emit('update:limit', val)
+        this.$emit('update:limit', val);
       }
     }
   },
@@ -81,9 +81,9 @@ export default {
         page: this.currentPage,
         size: val,
         type: 'pagination'
-      })
+      });
       if (this.autoScroll) {
-        scrollTo(0, 800)
+        scrollTo(0, 800);
       }
     },
     handleCurrentChange(val) {
@@ -91,13 +91,13 @@ export default {
         page: val,
         size: this.pageSize,
         type: 'pagination'
-      })
+      });
       if (this.autoScroll) {
-        scrollTo(0, 800)
+        scrollTo(0, 800);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

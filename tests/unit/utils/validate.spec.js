@@ -1,10 +1,4 @@
-import {
-  validUsername,
-  validURL,
-  validLowerCase,
-  validUpperCase,
-  validAlphabets,
-} from '@/utils/validate.js';
+import { validUsername, validURL, validLowerCase, validUpperCase, validAlphabets } from '@/shared/utils/validate.js';
 describe('Utils:validate', () => {
   it('validUsername', () => {
     expect(validUsername('admin')).toBe(true);
@@ -12,12 +6,8 @@ describe('Utils:validate', () => {
     expect(validUsername('xxxx')).toBe(false);
   });
   it('validURL', () => {
-    expect(validURL('https://github.com/PanJiaChen/vue-admin-template')).toBe(
-      true
-    );
-    expect(validURL('http://github.com/PanJiaChen/vue-admin-template')).toBe(
-      true
-    );
+    expect(validURL('https://github.com/PanJiaChen/vue-admin-template')).toBe(true);
+    expect(validURL('http://github.com/PanJiaChen/vue-admin-template')).toBe(true);
     expect(validURL('github.com/PanJiaChen/vue-admin-template')).toBe(false);
   });
   it('validLowerCase', () => {

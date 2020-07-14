@@ -1,7 +1,10 @@
 // 全局的 margin-* 样式
-@for $i from 1 through 6 {
+@for $i from 1 through 8 {
   $name: (5 * $i);
   $val: (5px * $i);
+  .margin-#{$name} {
+    margin: $val;
+  }
   .margin-top-#{$name} {
     margin-top: $val;
   }
@@ -16,9 +19,12 @@
   }
 }
 // 全局的 padding-* 样式
-@for $i from 1 through 6 {
+@for $i from 1 through 8 {
   $name: (5 * $i);
   $val: (5px * $i);
+  .padding-#{$name} {
+    padding: $val;
+  }
   .padding-top-#{$name} {
     margin-top: $val;
   }
