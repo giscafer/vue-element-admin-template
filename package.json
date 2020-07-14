@@ -6,19 +6,22 @@
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build:prod": "vue-cli-service build",
+    "build:dev": "vue-cli-service build  --mode development",
+    "build:prod": "vue-cli-service build  --mode production",
+    "build:test": "vue-cli-service build --mode staging",
     "build:stage": "vue-cli-service build --mode staging",
     "preview": "node build/index.js --preview",
     "lint": "eslint --ext .js,.vue src",
-    "lint-fix": "eslint --fix --ext .js,.vue src",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "test:ci": "npm run lint && npm run test:unit",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
+    "gitlab-ci": "node ./scripts/ci/compare-pk.js",
     "new": "plop"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "commit-msg": "node ./scripts/git/commit-msg.js -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run gitlab-ci && lint-staged"
     }
   },
   "lint-staged": {
@@ -38,10 +41,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PanJiaChen/vue-admin-template.git"
+    "url": "git+http://192.168.16.65/tsc-internal/middle-platform/frontend/vue-admin-template.git"
   },
   "bugs": {
-    "url": "https://github.com/PanJiaChen/vue-admin-template/issues"
+    "url": "http://192.168.16.65/tsc-internal/middle-platform/frontend/vue-admin-template/issues"
   },
   "dependencies": {
     "axios": "0.18.1",
