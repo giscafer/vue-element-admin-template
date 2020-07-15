@@ -454,7 +454,7 @@ export default {
     },
     handleDownload() {
       this.downloadLoading = true;
-      import('@/vendor/Export2Excel').then(excel => {
+      import('@/shared/export/Export2Excel').then(excel => {
         const tHeader = ['timestamp', 'title', 'type', 'importance', 'status'];
         const filterVal = ['timestamp', 'title', 'type', 'importance', 'status'];
         const data = this.formatJson(filterVal);
