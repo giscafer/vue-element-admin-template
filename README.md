@@ -1,6 +1,6 @@
 # vue-admin-template
 
-删减版的 [vue-admin-template](https://panjiachen.github.io/vue-admin-template) ，用于开发简单的后台管理系统，根据自身情况做删减不推荐别人使用模板开发
+模板框架设计见 [框架设计文档](./框架设计文档.md)
 
 ## 开发
 
@@ -48,5 +48,3 @@ npm run lint
 # 代码格式检查并自动修复
 npm run lint -- --fix
 ```
-
-更多信息请参考 [使用文档](https://panjiachen.github.io/vue-admin-template-site/zh/)
