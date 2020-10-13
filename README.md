@@ -15,7 +15,7 @@
 git clone https://github.com/giscafer/vue-admin-template.git
 
 # 进入项目目录
-cd middle-platform-console-web
+cd vue-admin-template
 
 # 安装依赖
 npm install
